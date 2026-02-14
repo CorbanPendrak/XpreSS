@@ -1,0 +1,24 @@
+# Apache configuration for XpreSS
+
+# Enable rewrite engine
+RewriteEngine On
+
+# Default document handling
+DirectoryIndex index.php index.html
+
+# Error pages (optional)
+ErrorDocument 404 /index.php
+
+# Prevent directory listing
+Options -Indexes
+
+# Allow .htaccess overrides
+AllowOverride All
+
+# PHP settings - INTENTIONALLY INSECURE for demo
+php_flag display_errors on
+php_value error_reporting E_ALL
+
+# CORS settings (if needed for testing)
+Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
