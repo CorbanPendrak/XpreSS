@@ -29,7 +29,7 @@
 
             echo '<div class="result">';
             echo '<h2>Filtered output</h2>';
-            echo '<p>Preview card for user: <input type="text" readonly value="' . $filtered . '"></p>';
+            echo '<p>Preview card for user: <input type="text" readonly value=' . $filtered . '></p>';
             echo '</div>';
         }
         ?>
