@@ -36,7 +36,7 @@ git clone <repository-url> && cd XpreSS
 chmod +x setup.sh install.sh
 sudo ./setup.sh          # LAMP install + deploy to /var/www/html/xpress
 # or
-curl -SL https://github.com/CorbanPendrak/XpreSS/releases/download/v1.0/install.sh | bash
+curl -SL https://github.com/CorbanPendrak/XpreSS/releases/latest/download/install.sh | bash
 ```
 
 Access at `http://localhost/`. DB credentials are set via Apache env vars in `/etc/apache2/conf-available/xpress-env.conf`.
