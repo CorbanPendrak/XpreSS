@@ -38,6 +38,7 @@
                 <li><a href="search.php">Search Page</a></li>
                 <li><a href="guestbook.php">Guest8ook</a></li>
                 <li><a href="profile.php?user=admin">Profile Page</a></li>
+                <li><a href="challenges.php">Filter Bypass Challenges</a></li>
             </ul>
         </div>
     </div>
