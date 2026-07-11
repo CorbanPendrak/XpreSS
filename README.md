@@ -8,18 +8,24 @@ XpreSS is a deliberately vulnerable PHP web app for learning and practicing Cros
 
 ## Current Features
 
-| Type | File | Vector |
-|------|------|--------|
-| Reflected XSS | `search.php` | `$_GET['q']` echoed in HTML body and input `value` |
-| Stored XSS | `guestbook.php` | POST data stored in MySQL and rendered unsanitized |
-| DOM-based XSS | `profile.php` | URL params (`user`, `bio`) injected via `innerHTML` |
+
+| Type          | File            | Vector                                              |
+| ------------- | --------------- | --------------------------------------------------- |
+| Reflected XSS | `search.php`    | `$_GET['q']` echoed in HTML body and input `value`  |
+| Stored XSS    | `guestbook.php` | POST data stored in MySQL and rendered unsanitized  |
+| DOM-based XSS | `profile.php`   | URL params (`user`, `bio`) injected via `innerHTML` |
+| Filter bypass | `challenges.php` | Weak blacklists — script, events, nesting, attributes |
+
 
 **Example payloads:**
+
 ```
 /search.php?q=<script>alert('XSS')</script>
 /profile.php?user=<img src=x onerror=alert('XSS')>
 /guestbook.php  →  Name: <img src=x onerror=alert('XSS')>
 ```
+
+
 
 ## Quick Setup
 
@@ -36,9 +42,12 @@ curl -SL https://github.com/CorbanPendrak/XpreSS/releases/download/v1.0/install.
 Access at `http://localhost/`. DB credentials are set via Apache env vars in `/etc/apache2/conf-available/xpress-env.conf`.
 
 **Deploy to remote server:**
+
 ```bash
 ./deploy.sh   # or rsync via deploy.sh defaults
 ```
+
+
 
 ## File Structure
 
@@ -48,6 +57,9 @@ XpreSS/
 ├── search.php          # Reflected XSS
 ├── guestbook.php       # Stored XSS
 ├── profile.php         # DOM XSS
+├── challenges.php      # Filter bypass challenge hub
+├── challenge-*.php     # Individual bypass levels
+├── filters.php         # Intentionally weak blacklist filters
 ├── db_config.php       # PDO config (env vars)
 ├── setup.sh            # LAMP stack setup
 ├── install.sh          # Bootstrap installer
@@ -58,27 +70,38 @@ XpreSS/
 └── .htaccess
 ```
 
+
+
 ## Roadmap
 
 ### XSS Scenarios
+
 - [ ] Context-specific XSS (HTML body, attribute, JS string, CSS)
 - [ ] Blind XSS (admin review panel)
 - [ ] Mutation XSS (mXSS)
 - [ ] CSP bypass lab
-- [ ] Filter bypass challenges
+- [x] Filter bypass challenges
 - [ ] JSON/API XSS
 
+
+
 ### Educational
+
 - [ ] Secure mode toggle (encoded vs vulnerable side-by-side)
 - [ ] Difficulty levels and solution hints
 - [ ] Attack logging / CTF scoring
 - [ ] Cookie/session theft lab
 
+
+
 ### DevOps & UX
+
 - [ ] Docker Compose for local setup
 - [ ] `test-database.sh` connection checker
 - [ ] Shared PHP layout (header/footer partials)
 - [ ] Guestbook reset endpoint
+
+
 
 ## Rework Needed
 
@@ -89,8 +112,10 @@ XpreSS/
 - **Duplicated HTML** — forms and layout repeated across `index.php`, `search.php`, `guestbook.php`
 - **DB error handling** — `db_config.php` dies on connection failure with exposed error details
 - **Plaintext lab passwords** — `setup-users.sh` stores credentials in repo
-- **`.htaccess` CORS headers** — require `mod_headers`, not enabled by `setup.sh`
-- **`info.php` leak** — setup creates `phpinfo()` page; easy to forget to remove
+- `.htaccess` **CORS headers** — require `mod_headers`, not enabled by `setup.sh`
+- `info.php` **leak** — setup creates `phpinfo()` page; easy to forget to remove
+
+
 
 ## Disclaimer
 
