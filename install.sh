@@ -5,7 +5,7 @@
 # Downloads the latest version from GitHub and runs the setup
 # 
 # Usage (no root needed for download!):
-#   curl -SL https://github.com/CorbanPendrak/XpreSS/releases/download/v1.0/install.sh | bash
+#   curl -SL https://github.com/CorbanPendrak/XpreSS/releases/latest/download/install.sh | bash
 #   
 #   Or download and run:
 #   wget https://github.com/CorbanPendrak/XpreSS/archive/refs/heads/main.zip
