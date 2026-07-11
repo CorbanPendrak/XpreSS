@@ -212,25 +212,7 @@ The deploy script automatically excludes database configuration files and tempor
 #### Using Rsync Directly
 
 ```bash
-# Sync local code to remote server at 198.18.2.216
-rsync -avz --exclude '.venv' --exclude '__pycache__' \
-  -e "ssh -i ~/.ssh/ncae_try_2.pem" \
-  /Users/corbanpendrak/Compile/XpreSS/ \
-  debian@198.18.2.216:~/XpreSS/
-
-# With delete option (removes files on remote that don't exist locally)
-rsync -avz --delete --exclude '.venv' --exclude '__pycache__' \
-  -e "ssh -i ~/.ssh/ncae_try_2.pem" \
-  /Users/corbanpendrak/Compile/XpreSS/ \
-  debian@198.18.2.216:~/XpreSS/
-
-# Watch mode: sync on file changes (requires fswatch on macOS)
-fswatch -o . | while read; do \
-  rsync -avz --exclude '.venv' --exclude '__pycache__' \
-    -e "ssh -i ~/.ssh/ncae_try_2.pem" \
-    /Users/corbanpendrak/Compile/XpreSS/ \
-    debian@198.18.2.216:~/XpreSS/; \
-done
+rsync -avz --exclude '.venv' --exclude '__pycache__' --exclude '.git' -e "ssh -i ~/.ssh/ncae_try_2.pem" /Users/corbanpendrak/Compile/XpreSS/ debian@198.18.0.108:~/XpreSS/
 ```
 
 **Rsync options explained:**
